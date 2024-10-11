@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Todo } from "../../../../store/store";
-import trash from "../../../../assets/images/trash.svg";
 import styles from "./TodoItem.module.scss";
+import Trash from "../../../../assets/images/trash.svg?react";
 
 type Props = {
   todo: Todo;
@@ -23,13 +23,7 @@ const TodoItem: FC<Props> = ({ todo, toggleTodo, deleteTodo }) => {
       >
         {todo.text}
       </span>
-      <button
-        type="button"
-        className={styles.deleteBtn}
-        onClick={() => deleteTodo(todo.id)}
-      >
-        <img src={trash} alt="Удалить задачу" className={styles.deleteImg} />
-      </button>
+      <Trash onClick={() => deleteTodo(todo.id)} className={styles.deleteBtn} />
     </article>
   );
 };
