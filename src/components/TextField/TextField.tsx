@@ -1,4 +1,4 @@
-import { ChangeEvent, FC } from "react";
+import React, { ChangeEvent, FC } from "react";
 import styles from "./TextField.module.scss";
 
 type Props = {

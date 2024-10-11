@@ -1,4 +1,4 @@
-import { Dispatch, FC, SetStateAction } from "react";
+import React, { Dispatch, FC, SetStateAction } from "react";
 import styles from "./Bottom.module.scss";
 import { Todo } from "../../store/store";
 import { Filters } from "../../app/types/types";

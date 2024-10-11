@@ -1,4 +1,4 @@
-import { FC } from "react";
+import React, { FC } from "react";
 import { Todo } from "../../../../store/store";
 import styles from "./TodoItem.module.scss";
 import Trash from "../../../../assets/images/trash.svg?react";
