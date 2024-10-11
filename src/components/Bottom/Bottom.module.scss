@@ -1,0 +1,55 @@
+.bottom {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.needTodo {
+  font: var(--font-m);
+  color: var(--description-color);
+}
+
+.selectAll {
+  font: var(--font-m);
+  color: var(--description-color);
+  background: transparent;
+  outline: none;
+  margin: 0;
+  padding: 0;
+  transition: color var(--transition-fast);
+}
+
+.selectAll:hover {
+  color: var(--primary-color);
+  cursor: pointer;
+}
+
+.filters {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  width: fit-content;
+}
+
+.filter {
+  font: var(--font-m);
+  color: var(--description-color);
+  background: transparent;
+  outline: none;
+  margin: 0;
+  padding: 0;
+  transition: color var(--transition-fast);
+}
+
+.filter:hover {
+  cursor: pointer;
+  color: var(--primary-color);
+}
+
+.filterActive {
+  text-decoration: underline;
+  color: var(--primary-color);
+}
