@@ -12,7 +12,7 @@ const TodoSlice = createSlice({
   reducers: {
     addTodo: (state, action) => {
       state.push({
-        id: state.length,
+        id: Date.now(),
         text: action.payload,
         completed: false,
       });
@@ -36,10 +36,13 @@ const TodoSlice = createSlice({
     ) => {
       return state.filter((todo) => todo.id !== action.payload);
     },
+    selectAll: (state) => {
+      state.forEach((todo) => (todo.completed = true));
+    },
   },
 });
 
-export const { addTodo, toggleTodo, deleteTodo } = TodoSlice.actions;
+export const { addTodo, toggleTodo, deleteTodo, selectAll } = TodoSlice.actions;
 
 const store = configureStore({
   reducer: {

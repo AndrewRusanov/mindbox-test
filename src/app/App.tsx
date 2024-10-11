@@ -1,9 +1,15 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import Header from "../components/Header";
 import "./styles/index.scss";
 import TextField from "../components/TextField";
 import { useDispatch, useSelector } from "react-redux";
-import { addTodo, deleteTodo, Todo, toggleTodo } from "../store/store";
+import {
+  addTodo,
+  deleteTodo,
+  selectAll,
+  Todo,
+  toggleTodo,
+} from "../store/store";
 import TodoList from "../components/TodoList";
 import Bottom from "../components/Bottom";
 import { Filters } from "./types/types";
@@ -34,7 +40,29 @@ const App = () => {
     dispatch(deleteTodo(id));
   };
 
+  const handleSelectAll = () => {
+    dispatch(selectAll());
+  };
+
+  const handleKeyDown = (event: KeyboardEvent) => {
+    if (event.key === "Enter") {
+      handleAddTodo();
+    }
+  };
+
   const NeedTodos = todos.filter((todo) => Boolean(!todo.completed));
+
+  const filteredTodos = todos.filter((todo) => {
+    if (filter === Filters.ALL) return true;
+    if (filter === Filters.ACTIVE) return !todo.completed;
+    if (filter === Filters.COMPLETED) return todo.completed;
+  });
+
+  useEffect(() => {
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [handleKeyDown]);
 
   return (
     <main className="app">
@@ -46,11 +74,16 @@ const App = () => {
           addTodo={handleAddTodo}
         />
         <TodoList
-          todos={todos}
+          todos={filteredTodos}
           toggleTodo={handleToggleTodo}
           deleteTodo={handleDeleteTodo}
         />
-        <Bottom needTodo={NeedTodos} filter={filter} setFilter={setFilter} />
+        <Bottom
+          needTodo={NeedTodos}
+          filter={filter}
+          setFilter={setFilter}
+          selectAll={handleSelectAll}
+        />
       </div>
     </main>
   );
