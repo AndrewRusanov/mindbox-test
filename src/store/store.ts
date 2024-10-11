@@ -1,6 +1,6 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
 
-type Todo = {
+export type Todo = {
   id: number;
   text: string;
   completed: boolean;
@@ -12,21 +12,34 @@ const TodoSlice = createSlice({
   reducers: {
     addTodo: (state, action) => {
       state.push({
-        id: Date.now(),
+        id: state.length,
         text: action.payload,
         completed: false,
       });
     },
-    toggleTodo: (state, action) => {
+    toggleTodo: (
+      state,
+      action: {
+        payload: number;
+      }
+    ) => {
       const todo = state.find((todo) => todo.id === action.payload);
       if (todo) {
         todo.completed = !todo.completed;
       }
     },
+    deleteTodo: (
+      state,
+      action: {
+        payload: number;
+      }
+    ) => {
+      return state.filter((todo) => todo.id !== action.payload);
+    },
   },
 });
 
-export const { addTodo, toggleTodo } = TodoSlice.actions;
+export const { addTodo, toggleTodo, deleteTodo } = TodoSlice.actions;
 
 const store = configureStore({
   reducer: {
